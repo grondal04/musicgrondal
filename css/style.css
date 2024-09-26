@@ -1,0 +1,355 @@
+:root {
+    --main-font: 'Press Start 2P';
+    --secondary-font: 'Noto Sans';
+    --default-font: 'Montserrat';
+
+    --main-text-color: #fafafa;
+
+
+    --header-gradient: linear-gradient(to right, #000000, #0a0a0a);
+    --web-gradient: radial-gradient(circle at 24.1% 68.8%, rgb(26, 26, 26) 0%, rgb(0, 0, 0) 99.4%);
+    --white-gradient: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+    
+}
+
+* {
+    font-family: var(--secondary-font);
+    color: var(--main-text-color);
+}
+
+.page {
+    padding: 0;
+
+    position: relative;
+    overflow: visible;
+
+}
+
+.header {
+    background: var(--header-gradient);
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+body {
+    overflow: visible;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: var(--web-gradient);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.header .logo span {
+    font-family: var(--main-font);
+}
+
+.header .logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+
+.header nav>ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+nav {}
+
+.header nav ul li {
+    display: block;
+    padding: 1.5rem 1rem;
+    list-style-type: none;
+    width: 8rem;
+    height: 100%;
+
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.col-8:has(nav ul li) {
+    padding: 0 0;
+}
+
+.navigation {
+    padding: 0 0;
+}
+
+.drop-down-parent {
+    position: relative;
+}
+
+.drop-down-parent::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-image: url(../assets/svgs/dropdown-white.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 50%;
+    right: 5px;
+    position: absolute;
+
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.drop-down-parent:hover ul.drop-down-menu {
+    visibility: visible;
+}
+
+ul.drop-down-menu {
+    visibility: hidden;
+    position: absolute;
+
+    left: 0;
+    top: calc(100%);
+
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+}
+
+li.drop-down-menu-child {
+    list-style-type: disc;
+    margin: 0;
+    padding: 0;
+
+    background-color: grey;
+}
+
+li.drop-down-menu-child:hover {
+    background: white !important;
+}
+
+li.drop-down-menu-child:hover a {
+    color: black;
+}
+
+
+li.drop-down-menu-child a {
+    text-decoration: none;
+}
+
+.header nav ul li:hover {
+    background: var(--white-gradient);
+    color: black;
+    cursor: pointer;
+}
+
+.right-header {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-wrap: nowrap;
+
+}
+
+.right-header .lang {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+}
+
+.right-header .merch a {
+    font-family: var(--main-font);
+    text-decoration: none;
+}
+
+/* End Header******************************* */
+
+.slider {
+    height: 100vh;
+    position: relative;
+
+}
+
+.slider .list .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s;
+}
+
+.slider .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider .list .item::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #000 20%, transparent);
+}
+
+.slider .list .item .content {
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    width: 500px;
+    max-width: 80%;
+    z-index: 1;
+}
+
+.slider .list .item .content:nth-child(1) {
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+
+.slider .list .item .content h2 {
+    font-size: 100px;
+    margin: 0;
+}
+
+.slider .list .item.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+@keyframes showContent {
+    to {
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }    
+}
+
+.slider .list .item.active p:nth-child(1), 
+.slider .list .item.active h2, 
+.slider .list .item.active p:nth-child(3) {
+    transform: translateX(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+}
+
+.slider .list .item.active h2 {
+    animation-delay: .5s;
+}
+
+.slider .list .item.active p:nth-child(3) {
+    animation-duration: 1s;
+}
+
+.arrows {
+    position: absolute;
+    top: 30%;
+    right: 50px;
+    z-index: 100;
+}
+
+.arrows button:hover {cursor: pointer;}
+
+.arrows button {
+    background-color: #eee5;
+    border: none;
+    font-family: var(--main-font);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: x-large;
+    color: #eee;
+    transform: .5s;
+}
+
+.arrows button:hover {
+    background-color: #eee;
+    color: black;
+}
+
+.thumbnail {
+
+    /* background-color: red; */
+
+    position: absolute;
+    bottom: 100px;
+    z-index: 11;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 250px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    overflow: auto;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.thumbnail::-webkit-scrollbar {
+    width: 0;
+}
+
+.thumbnail .item {
+    width: 150px;
+    height: 220px;
+    filter: brightness(.5);
+    transition: .5s;
+    flex-shrink: 0;
+}
+
+.thumbnail .item:hover {
+    cursor: pointer;
+}
+
+.thumbnail .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.thumbnail .item.active {
+    filter: brightness(1);
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 4px 16px, rgba(255, 255, 255, 0.05) 0px 8px 32px;
+
+    width: 230px;
+}
+
+.thumbnail .item .content {
+    position: absolute;
+    inset: auto 10px 10px 10px;
+}
+
+@media screen and (max-width: 678px) {
+    .thumbnail {
+        justify-content: flex-start;
+        bottom: 20%;
+    }
+
+    .thumbnail .item {
+        width: 80px;
+        height: 110px;
+    }
+
+    .thumbnail .content {
+        display: none;
+    }
+
+    .thumbnail .item.active {
+        width: 115px;
+    } 
+
+    .slider .list .item .content h2 {
+        font-size: 60px;
+    }
+
+    .arrows {
+        top: 10%;
+    }
+}
